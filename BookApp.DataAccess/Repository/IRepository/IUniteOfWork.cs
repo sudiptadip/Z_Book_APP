@@ -9,6 +9,7 @@ namespace BookApp.DataAccess.Repository.IRepository
     public interface IUniteOfWork
     {
         public ICategoryRepository Category { get; }
+        public IProductRepository Product { get; }
         public void Save();
     }
 }
