@@ -31,24 +31,47 @@ namespace BookApp.DataAccess.Repository
             dbSet.Remove(entity);
         }
 
-        T IRepository<T>.Get(Expression<Func<T, bool>> filter)
+        T IRepository<T>.Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(item);
+                }
+            }
             query = query.Where(filter);
             return query.FirstOrDefault();
         }
 
-        IEnumerable<T> IRepository<T>.GetAll(Expression<Func<T, bool>> filter = null)
-        {
+        IEnumerable<T> IRepository<T>.GetAll(Expression<Func<T, bool>> filter = null, string? includeProperties = null)
+        {      
             if(filter != null)
             {
                 IQueryable<T> query = dbSet;
+
+                if (!string.IsNullOrEmpty(includeProperties))
+                {
+                    foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query.Include(item);
+                    }
+                }
+
                 query = query.Where(filter);
                 return query.ToList();
             }
             else
             {
                 IQueryable<T> query = dbSet;
+                if (!string.IsNullOrEmpty(includeProperties))
+                {
+                    foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query = query.Include(item);
+                    }
+                }
                 return query.ToList();
             }
         }

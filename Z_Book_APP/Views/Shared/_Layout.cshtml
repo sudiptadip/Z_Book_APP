@@ -22,9 +22,19 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                        </li>                        
+                        <li class="nav-item dropdown">
+                            <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </p>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">
+                                    <a class="nav-link text-primary fw-bold" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="nav-link text-primary fw-bold" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -34,7 +44,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mb-3 pb-3" style="min-height:100vh">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
