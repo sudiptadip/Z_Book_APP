@@ -1,0 +1,59 @@
+﻿@model Company
+
+
+
+@if (Model != null && !string.IsNullOrWhiteSpace(Model.Name))
+{
+    <h3 class="text-center py-4">Update Company</h3>
+}
+else
+{
+    <h3 class="text-center py-4">Create Company</h3>
+}
+
+<a asp-action="Index" asp-controller="Company" class="btn btn-primary">Back To Index</a>
+
+<form method="post" >
+
+    <div class="row" >
+        <div class="col-12" >
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="StreetAddress" class="form-label">Street Address</label>
+                <input asp-for="StreetAddress" class="form-control">
+                <span class="text-danger" asp-validation-for="StreetAddress"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="City" class="form-label"></label>
+                <input asp-for="City" class="form-control">
+                <span class="text-danger" asp-validation-for="City"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="State" class="form-label">State</label>
+                <input asp-for="State" class="form-control">
+                <span class="text-danger" asp-validation-for="State"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="PostalCode" class="form-label">PostalCode</label>
+                <input asp-for="PostalCode" class="form-control">
+                <span class="text-danger" asp-validation-for="PostalCode"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control">
+                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>  
+</form>
+
+@section Scripts{
+    <scripts>
+        <partial name="_ValidationScriptsPartial" />
+    </scripts>
+}

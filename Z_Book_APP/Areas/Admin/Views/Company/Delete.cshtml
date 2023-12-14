@@ -1,0 +1,50 @@
+﻿@model Company
+
+
+
+
+    <h3 class="text-center py-4">Delete Company</h3>
+
+
+<a asp-action="Index" asp-controller="Company" class="btn btn-primary">Back To Index</a>
+
+<form method="post">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input disabled asp-for="Name" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="StreetAddress" class="form-label">Street Address</label>
+                <input disabled asp-for="StreetAddress" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="City" class="form-label"></label>
+                <input disabled asp-for="City" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="State" class="form-label">State</label>
+                <input disabled asp-for="State" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="PostalCode" class="form-label">PostalCode</label>
+                <input disabled asp-for="PostalCode" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input disabled asp-for="PhoneNumber" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts{
+    <scripts>
+        <partial name="_ValidationScriptsPartial" />
+    </scripts>
+}

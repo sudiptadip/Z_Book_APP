@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using BookApp.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using BookApp.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Z_Book_APP.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUniteOfWork _uniteOfWork;

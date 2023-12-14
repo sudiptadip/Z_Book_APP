@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BookApp.DataAccess\BookApp.DataAccess.csproj" />
     <ProjectReference Include="..\BookApp.Model\BookApp.Model.csproj" />
+    <ProjectReference Include="..\BookApp.Utility\BookApp.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

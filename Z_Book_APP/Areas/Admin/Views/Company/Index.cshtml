@@ -1,0 +1,36 @@
+﻿@model List<Company>
+
+
+<h2 class="text-center py-4">Create Company</h2>
+<a asp-action="Create" asp-controller="Company" class="btn btn-primary">Create Company</a>
+
+<table class="table table-striped border">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Street Address</th>
+            <th scope="col">City</th>
+            <th scope="col">Postal Code</th>
+            <th scope="col">Price</th>
+            <th scope="col">Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Name</td>
+                <td>@item.StreetAddress</td>
+                <td>@item.City</td>
+                <td>@item.State</td>
+                <td>@item.PostalCode</td>
+                <td>@item.PhoneNumber</td>
+                <td><a asp-action="Create" asp-controller="Company" asp-route-id="@item.Id" class="btn btn-sm btn-warning px-4 me-3">Edit</a>
+                    <a asp-action="Delete" asp-controller="Company" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
