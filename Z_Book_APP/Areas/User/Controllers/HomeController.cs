@@ -1,7 +1,9 @@
 using BookApp.DataAccess.Repository.IRepository;
 using BookApp.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Z_Book_APP.Areas.User.Controllers
 {
@@ -25,8 +27,25 @@ namespace Z_Book_APP.Areas.User.Controllers
 
         public IActionResult Details(int productId)
         {
-            Product product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category");
-            return View(product);
+            ShoppingCart cart = new() 
+            {
+                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category"),
+                Count = 1,
+                ProductId = productId
+            };
+            return View(cart);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart cart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            cart.ApplicationUserId = userId;
+            _unitOfWork.ShoppingCart.Add(cart);
+            _unitOfWork.Save();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
