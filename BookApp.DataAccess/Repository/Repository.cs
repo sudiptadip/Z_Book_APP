@@ -31,18 +31,35 @@ namespace BookApp.DataAccess.Repository
             dbSet.Remove(entity);
         }
 
-        T IRepository<T>.Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        T IRepository<T>.Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
-            IQueryable<T> query = dbSet;
-            if (!string.IsNullOrEmpty(includeProperties))
+            if (tracked)
             {
-                foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                IQueryable<T> query = dbSet;
+                if (!string.IsNullOrEmpty(includeProperties))
                 {
-                    query = query.Include(item);
+                    foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query = query.Include(item);
+                    }
                 }
+                query = query.Where(filter);
+                return query.FirstOrDefault();
             }
-            query = query.Where(filter);
-            return query.FirstOrDefault();
+            else
+            {
+                IQueryable<T> query = dbSet.AsNoTracking();
+                if (!string.IsNullOrEmpty(includeProperties))
+                {
+                    foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query = query.Include(item);
+                    }
+                }
+                query = query.Where(filter);
+                return query.FirstOrDefault();
+            }
+
         }
 
         IEnumerable<T> IRepository<T>.GetAll(Expression<Func<T, bool>> filter = null, string? includeProperties = null)
@@ -55,7 +72,7 @@ namespace BookApp.DataAccess.Repository
                 {
                     foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                     {
-                        query.Include(item);
+                        query = query.Include(item);
                     }
                 }
 
