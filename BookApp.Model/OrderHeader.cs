@@ -30,6 +30,8 @@ namespace BookApp.Model
         public DateTime PaymentDate { get; set; }
         public DateOnly PaymentDueDate { get; set; }
 
+
+        public string? SectionId { get; set; }
         public string? PaymentIntentId { get; set; }
 
         [Required]

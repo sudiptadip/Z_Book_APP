@@ -15,5 +15,10 @@ namespace BookApp.DataAccess.Repository
         {
             _db.OrderHeaders.Update(entity);
         }
+
+        public void UpdateStatus(int id, string orderStatus, string? paymentStatus = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
